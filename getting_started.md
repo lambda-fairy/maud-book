@@ -34,7 +34,7 @@ fn main() {
 
 Run this program with `cargo run`, and you'll (hopefully) get the following:
 
-```
+```html
 <p>Hi, Lyra!</p>
 ```
 
