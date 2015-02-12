@@ -1,4 +1,4 @@
-GitBook Example
-=======
+Meet Maud
+=========
 
-Welcome in your GitBook!
+Maud is a template language.
