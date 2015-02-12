@@ -5,7 +5,7 @@ Maud is an experimental template language for Rust. It's implemented as a macro,
 
 You've probably used the `println!` or `regex!` macros before. Maud takes the same idea, and applies it to HTML templates. If you make a typo in your markup, the compiler will tell you straight away -- instead of your app crashing at runtime.
 
-Another advantage is performance. Since everything is decided at compile time, there are no hash maps, no intermediate structures, no runtime checking that slows the code down. In fact, Maud can run just fine without a heap, as all its runtime structures are unboxed.
+Another advantage is performance. Since everything is decided at compile time, there are no hash maps, no intermediate structures, no runtime checking to slow the code down. In fact, Maud can run just fine without a heap, as all its runtime structures are unboxed.
 
 There is one drawback though: Maud relies on very unstable compiler APIs, which are unlikely to make it into Rust 1.0. You'll need to install the Nightly version of Rust instead.
 
