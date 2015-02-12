@@ -1,6 +1,6 @@
 # Getting started
 
-Maud uses [Cargo] for dependency management.
+Like most Rust packages, Maud uses [Cargo] for dependency management.
 
 [Cargo]: https://crates.io/
 
