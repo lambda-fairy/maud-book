@@ -13,7 +13,7 @@ maud = "*"
 maud_macros = "*"
 ```
 
-The `maud` crate contains types and functions used by the generated code, whereas `maud_macros` provides the `html!` macro itself. Both are essential to using the library.
+The `maud` crate exports types and functions used by the generated code, whereas `maud_macros` provides the `html!` macro itself. Both are essential to using the library.
 
 Now save the following to `src/main.rs`:
 
