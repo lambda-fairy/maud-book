@@ -1,9 +1,21 @@
 # Getting started
 
-Example
--------
+Maud uses [Cargo] for dependency management.
 
-Here's a minimal example of Maud in action:
+[Cargo]: https://crates.io/
+
+First off, add `maud` and `maud_macros` to your `Cargo.toml`:
+
+```toml
+[dependencies]
+# ...
+maud = "*"
+maud_macros = "*"
+```
+
+The `maud` crate contains types and functions used by the generated code, whereas `maud_macros` provides the `html!` macro itself. Both are essential to using the library.
+
+Now save the following to `src/main.rs`:
 
 ```rust
 #![feature(plugin)]
@@ -16,20 +28,12 @@ fn main() {
     let markup = html! {
         p { "Hi, " $name "!" }
     };
-    assert_eq!(markup.to_string(), "<p>Hi, Lyra!</p>");
+    println!("{}", markup.to_string());
 }
 ```
 
-Getting started
----------------
+Run this program with `cargo run`, and you'll (hopefully) get the following:
 
-First off, add `maud` and `maud_macros` to your `Cargo.toml`:
-
-```toml
-[dependencies]
-# ...
-maud = "*"
-maud_macros = "*"
 ```
-
-`maud` contains various types and functions used by the generated code. `maud_macros` provides the `html!` macro itself. Both are essential to using the library.
+<p>Hi, Lyra!</p>
+```
