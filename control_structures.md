@@ -18,7 +18,7 @@ html! {
             li "Kick a puppy"
             li "Evil laugh"
         }
-    } $else $if user == Princess::Celestia {
+    } $else if user == Princess::Celestia {
         p "Sister, please stop reading my diary. It's rude."
     } $else {
         p "Nothing to see here; move along."
