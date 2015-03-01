@@ -19,9 +19,9 @@ Now save the following to `src/main.rs`:
 
 ```rust
 #![feature(plugin)]
+#![plugin(maud_macros)]
 
 extern crate maud;
-#[plugin] #[no_link] extern crate maud_macros;
 
 fn main() {
     let name = "Lyra";
