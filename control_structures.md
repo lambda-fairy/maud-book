@@ -8,7 +8,8 @@ Maud provides various control structures for adding dynamic elements to your tem
 #[derive(PartialEq)]
 enum Princess { Celestia, Luna, Cadance, TwilightSparkle }
 
-let user = Celestia;
+let user = Princess::Celestia;
+
 html! {
     $if user == Princess::Luna {
         h1 "Super secret woona to-do list"
