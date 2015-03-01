@@ -6,4 +6,4 @@ If you've used the `println!` or `regex!` macros before, this concept should sou
 
 Another advantage is performance. Since everything is decided at compile time, there are no hash maps, no intermediate structures, no runtime checking to slow the code down. In fact, Maud can run just fine without a heap, as all its runtime structures are unboxed.
 
-There is one drawback though: Maud relies on very unstable compiler APIs, which are unlikely to make it into Rust 1.0. You'll need to install the Nightly version of Rust instead.
+There is one drawback though: Maud relies on very unstable compiler APIs, which are unlikely to make it into Rust 1.0. You'll need to install the Nightly version of Rust to use it.
