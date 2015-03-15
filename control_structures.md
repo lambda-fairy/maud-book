@@ -28,6 +28,23 @@ html! {
 
 Use `$if` and `$else` to branch on a boolean expression. As with Rust, braces are mandatory and the `$else` clause is optional.
 
+`$if let` is supported as well. It works as you'd expect:
+
+```rust
+let user = Some("Pinkie Pie");
+html! {
+    p {
+        "Hello, "
+        $if let Some(name) = user {
+            $name
+        } $else {
+            "stranger"
+        }
+        "!"
+    }
+}
+```
+
 ## Looping with `$for`
 
 ```rust
