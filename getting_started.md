@@ -38,4 +38,4 @@ Run this program with `cargo run`, and you'll (hopefully) get the following:
 <p>Hi, Lyra!</p>
 ```
 
-Congrats -- you've written your first Maud program!
+Congrats – you've written your first Maud program!
