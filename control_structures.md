@@ -52,7 +52,7 @@ let names = ["Applejack", "Rarity", "Fluttershy"];
 html! {
     p "My favorite ponies are:"
     ol {
-        $for name in names.iter() {
+        $for name in &names {
             li $name
         }
     }
