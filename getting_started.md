@@ -22,13 +22,14 @@ Now save the following to `src/main.rs`:
 #![plugin(maud_macros)]
 
 extern crate maud;
+use std::io;
 
 fn main() {
     let name = "Lyra";
     let markup = html! {
         p { "Hi, " $name "!" }
     };
-    println!("{}", markup.to_string());
+    markup.render(&mut io::stdout()).unwrap();
 }
 ```
 
