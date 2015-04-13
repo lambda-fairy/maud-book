@@ -114,6 +114,17 @@ html! {
 
 Add attributes using the syntax: `attr="value"`. You can attach any number of attributes to an element. The values must be quoted: they are parsed as string literals.
 
+```rust
+let secret_message = "Surprise!";
+html! {
+    p title=$secret_message {
+        "Nothing to see here, move along."
+    }
+}
+```
+
+Splices work in attributes as well.
+
 ## Empty attributes `checked?` `disabled?=foo`
 
 ```rust
