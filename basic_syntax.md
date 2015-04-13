@@ -1,7 +1,5 @@
 # Basic syntax
 
-Maud has its own custom syntax, which can be described as the bastard child of Rust and HTML.
-
 ## Comments `//` `/* */`
 
 ```rust
