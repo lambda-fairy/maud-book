@@ -26,6 +26,7 @@ We then get:
 
 ```text
 $ cargo build
+
    Compiling lyra v0.0.1 (file:///home/chris/dev/maud/lyra)
 src/main.rs:9:18: 11:7 note: expansion:
 ::maud::rt::make_markup(|w: &mut ::std::fmt::Write| ->
