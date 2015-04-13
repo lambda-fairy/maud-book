@@ -30,7 +30,7 @@ html! {
 
 By default, HTML special characters are escaped automatically. Add a `$$` prefix to disable this escaping. (This is a special case of the *splice* syntax described below.)
 
-## Splices `$foo`
+## Splices `$foo` `$(foo)`
 
 ```rust
 let best_pony = "Pinkie Pie";
@@ -40,8 +40,6 @@ html! {
 ```
 
 Use `$foo` syntax to splice in the value of `foo`. You can splice any value that implements [`Display`][Display].
-
-[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
 
 ```rust
 let pre_escaped = "<p>Pre-escaped</p>";
@@ -63,7 +61,7 @@ html! {
 }
 ```
 
-Indexing (`$foo[0]`), method calls (`$foo.method(arg)`), and property lookups (`$foo.bar`) work as you'd expect.
+Indexing (`$foo[0]`), method calls (`$foo.method(arg)`), and property lookups (`$foo.property`) work as you'd expect.
 
 ```rust
 html! {
@@ -74,6 +72,8 @@ html! {
 ```
 
 You can splice more complex expressions using `$(expr)` syntax.
+
+[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
 
 ## Elements `p {}`
 
