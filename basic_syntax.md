@@ -16,12 +16,17 @@ Rust comments work as expected. In fact they're stripped by the compiler at the 
 ```rust
 html! {
     "Oatmeal, are you crazy?"
-    "<script>alert(\"XSS\")</script>"  // &lt;script&gt;...
-    $$"<script>alert(\"XSS\")</script>"  // <script>...
 }
 ```
 
 Literal strings use the same syntax as Rust. Wrap them in double quotes, and use a backslash for escapes.
+
+```rust
+html! {
+    "<script>alert(\"XSS\")</script>"  // &lt;script&gt;...
+    $$"<script>alert(\"XSS\")</script>"  // <script>...
+}
+```
 
 By default, HTML special characters are escaped automatically. Add a `$$` prefix to disable this escaping. (This is a special case of the *splice* syntax described below.)
 
@@ -35,7 +40,6 @@ html! {
         br /
         "Eye of a newt and cinnamon"
     }
-    p small em "squee"
 }
 ```
 
@@ -43,7 +47,13 @@ Write an element using curly braces: `p {}`.
 
 Terminate a void element using a slash: `br /`.
 
-If the element has only a single child, you can omit the brackets: `h1 "Pinkie's Brew"`. This shorthand works with nested elements too.
+```rust
+html! {
+    p small em "squee"
+}
+```
+
+If the element has only a single child, you can omit the brackets. This shorthand works with nested elements too.
 
 ## Non-empty attributes `id="yay"`
 
@@ -62,19 +72,46 @@ Add attributes using the syntax: `attr="value"`. You can attach any number of at
 ## Empty attributes `checked?` `disabled?=foo`
 
 ```rust
-let allow_editing = true;
 html! {
     form {
         input type="checkbox" name="cupcakes" checked? /
         " "
         label for="cupcakes" "Do you like cupcakes?"
     }
+}
+```
+
+Declare an empty attribute using a `?` suffix: `checked?`.
+
+```rust
+let allow_editing = true;
+html! {
     p contenteditable?=allow_editing {
         "Edit me, I " em "dare" " you."
     }
 }
 ```
 
-Declare an empty attribute using a `?` suffix: `checked?`.
+To toggle an attribute based on a boolean flag, use a `?=` suffix instead: `checked?=foo`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
 
-To toggle the attribute based on a boolean flag, use a `?=` suffix instead: `checked?=foo`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
+## Splices
+
+```rust
+let best_pony = "Pinkie Pie";
+let numbers = [1, 2, 3, 4];
+let secret_message = "Surprise!";
+let pre_escaped = "<p>Pre-escaped</p>";
+html! {
+    h1 { $best_pony " says:" }
+    p {
+        "I have " $numbers.len() " numbers, "
+        "and the first one is " $numbers[0]
+    }
+    p title=$secret_message {
+        "1 + 1 = " $(1 + 1)
+    }
+    $$pre_escaped
+}
+```
+
+TODO
