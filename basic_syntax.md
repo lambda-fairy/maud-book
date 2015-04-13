@@ -41,6 +41,8 @@ html! {
 
 Use `$foo` syntax to splice in the value of `foo`. You can splice any value that implements [`Display`][Display].
 
+[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
+
 ```rust
 let pre_escaped = "<p>Pre-escaped</p>";
 html! {
@@ -72,8 +74,6 @@ html! {
 ```
 
 You can splice more complex expressions using `$(expr)` syntax.
-
-[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
 
 ## Elements `p {}`
 
