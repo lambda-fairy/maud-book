@@ -134,7 +134,7 @@ html! {
 }
 ```
 
-To concatenate multiple items within an attribute, wrap the whole thing in braces. This syntax is useful for building URLs.
+To concatenate multiple values within an attribute, wrap the whole thing in braces. This syntax is useful for building URLs.
 
 ## Empty attributes `checked?` `disabled?=foo`
 
