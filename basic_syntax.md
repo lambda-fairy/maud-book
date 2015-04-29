@@ -75,7 +75,7 @@ html! {
 
 You can splice more complex expressions using `$(expr)` syntax.
 
-## Elements `p {}`
+## Elements `p`
 
 ```rust
 html! {
@@ -88,7 +88,7 @@ html! {
 }
 ```
 
-Write an element using curly braces: `p {}`.
+Write an element using curly braces: `p { ... }`.
 
 Terminate a void element using a slash: `br /`.
 
@@ -104,7 +104,7 @@ If the element has only a single child, you can omit the brackets. This shorthan
 
 ```rust
 html! {
-    ul id="crusaders" class="truants" {
+    ul {
         li a href="about:blank" "Apple Bloom"
         li class="lower-middle" "Sweetie Belle"
         li dir="rtl" { "Scootaloo " small "(also a chicken)" }
@@ -124,6 +124,17 @@ html! {
 ```
 
 Splices work in attributes as well.
+
+```rust
+const GITHUB: &'static str = "https://github.com";
+html! {
+    a href={ $GITHUB "/lfairy/maud" } {
+        "Fork me on GitHub"
+    }
+}
+```
+
+To concatenate multiple items within an attribute, wrap the whole thing in braces. This syntax is useful for building URLs.
 
 ## Empty attributes `checked?` `disabled?=foo`
 
