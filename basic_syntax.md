@@ -55,6 +55,51 @@ html! {
 
 If the element has only a single child, you can omit the brackets. This shorthand works with nested elements too.
 
+## Splices `$foo` `$(foo)`
+
+```rust
+let best_pony = "Pinkie Pie";
+html! {
+    p { "Hi, " $best_pony "!" }
+}
+```
+
+Use `$foo` syntax to splice in the value of `foo`. You can splice any value that implements [`Display`][Display].
+
+[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
+
+```rust
+let pre_escaped = "<p>Pre-escaped</p>";
+html! {
+    h1 "My super duper blog post"
+    $$pre_escaped
+}
+```
+
+Maud escapes HTML special characters by default. To disable this escaping, use a `$$` prefix instead.
+
+```rust
+let numbers = [1, 2, 3, 4];
+html! {
+    p {
+        "I have " $numbers.len() " numbers, "
+        "and the first one is " $numbers[0]
+    }
+}
+```
+
+Indexing (`$foo[0]`), method calls (`$foo.method(arg)`), and property lookups (`$foo.property`) work as you'd expect.
+
+```rust
+html! {
+    p {
+        "The answer is " $(27 + 15) "."
+    }
+}
+```
+
+You can splice more complex expressions using `$(expr)` syntax.
+
 ## Non-empty attributes `id="yay"`
 
 ```rust
@@ -115,48 +160,3 @@ html! {
 ```
 
 To toggle an attribute based on a boolean flag, use a `?=` suffix instead: `checked?=foo`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
-
-## Splices `$foo` `$(foo)`
-
-```rust
-let best_pony = "Pinkie Pie";
-html! {
-    p { "Hi, " $best_pony "!" }
-}
-```
-
-Use `$foo` syntax to splice in the value of `foo`. You can splice any value that implements [`Display`][Display].
-
-[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
-
-```rust
-let pre_escaped = "<p>Pre-escaped</p>";
-html! {
-    h1 "My super duper blog post"
-    $$pre_escaped
-}
-```
-
-Maud escapes HTML special characters by default. To disable this escaping, use a `$$` prefix instead.
-
-```rust
-let numbers = [1, 2, 3, 4];
-html! {
-    p {
-        "I have " $numbers.len() " numbers, "
-        "and the first one is " $numbers[0]
-    }
-}
-```
-
-Indexing (`$foo[0]`), method calls (`$foo.method(arg)`), and property lookups (`$foo.property`) work as you'd expect.
-
-```rust
-html! {
-    p {
-        "The answer is " $(27 + 15) "."
-    }
-}
-```
-
-You can splice more complex expressions using `$(expr)` syntax.
