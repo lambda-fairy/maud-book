@@ -30,6 +30,7 @@ We then get:
 $ cargo build
    Compiling lyra v0.1.0 (file:///home/chris/dev/maud/lyra)
 src/main.rs:12:5: 14:7 note: expansion:
+src/main.rs:12:5: 14:7 note: expansion:
 {
     let mut __maud_result = Ok(());
     __maud_loop_label:
@@ -37,6 +38,7 @@ src/main.rs:12:5: 14:7 note: expansion:
             use std::fmt::Write;
             match &mut output {
                 __maud_writer => {
+                    __maud_writer as &mut ::std::fmt::Write;
                     match __maud_writer.write_str("<p>Hi, ") {
                         Ok(()) => { }
                         Err(e) => {
