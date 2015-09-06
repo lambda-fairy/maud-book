@@ -11,14 +11,16 @@ For example, if we build this code:
 #![plugin(maud_macros)]
 
 extern crate maud;
+use maud::Utf8Writer;
+
 use std::io;
 
 fn main() {
     let name = "Lyra";
-    let markup = html_debug! {
+    let output = Utf8Writer::new(io::stdout());
+    html_debug!(output, {
         p { "Hi, " $name "!" }
-    };
-    markup.render(&mut io::stdout()).unwrap();
+    }).unwrap();
 }
 ```
 
@@ -26,28 +28,44 @@ We then get:
 
 ```
 $ cargo build
-   Compiling lyra v0.0.1 (file:///home/chris/dev/maud/lyra)
-src/main.rs:9:18: 11:7 note: expansion:
-::maud::rt::make_markup(|w: &mut ::std::fmt::Write| ->
-                            Result<(), ::std::fmt::Error> {
-                        match w.write_str("<p>Hi, ") {
-                            ::std::result::Result::Ok(__try_var) => __try_var,
-                            ::std::result::Result::Err(__try_var) =>
-                            return ::std::result::Result::Err(__try_var),
-                        };
-                        match ::maud::rt::write_fmt(&mut ::maud::rt::Escaper{inner:
-                                                                                 w,},
-                                                    name) {
-                            ::std::result::Result::Ok(__try_var) => __try_var,
-                            ::std::result::Result::Err(__try_var) =>
-                            return ::std::result::Result::Err(__try_var),
-                        };
-                        match w.write_str("!</p>") {
-                            ::std::result::Result::Ok(__try_var) => __try_var,
-                            ::std::result::Result::Err(__try_var) =>
-                            return ::std::result::Result::Err(__try_var),
-                        }; Ok(()) })
-src/main.rs:9     let markup = html_debug! {
-src/main.rs:10         p { "Hi, " $name "!" }
-src/main.rs:11     };
+   Compiling lyra v0.1.0 (file:///home/chris/dev/maud/lyra)
+src/main.rs:12:5: 14:7 note: expansion:
+{
+    let mut __maud_result = Ok(());
+    __maud_loop_label:
+        loop  {
+            use std::fmt::Write;
+            match &mut output {
+                __maud_writer => {
+                    match __maud_writer.write_str("<p>Hi, ") {
+                        Ok(()) => { }
+                        Err(e) => {
+                            __maud_result = Err(e);
+                            break __maud_loop_label ;
+                        }
+                    }
+                    match write!(:: maud:: rt:: Escaper {
+                                 inner : __maud_writer } , "{}" , name) {
+                        Ok(()) => { }
+                        Err(e) => {
+                            __maud_result = Err(e);
+                            break __maud_loop_label ;
+                        }
+                    }
+                    match __maud_writer.write_str("!</p>") {
+                        Ok(()) => { }
+                        Err(e) => {
+                            __maud_result = Err(e);
+                            break __maud_loop_label ;
+                        }
+                    }
+                }
+            }
+            break __maud_loop_label ;
+        }
+    __maud_result
+}
+src/main.rs:12     html_debug!(output, {
+src/main.rs:13         p { "Hi, " $name "!" }
+src/main.rs:14     }).unwrap();
 ```
