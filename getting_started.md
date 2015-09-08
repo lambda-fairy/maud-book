@@ -22,7 +22,6 @@ Now save the following to `src/main.rs`:
 #![plugin(maud_macros)]
 
 extern crate maud;
-use maud::Utf8Writer;
 
 use std::io;
 
