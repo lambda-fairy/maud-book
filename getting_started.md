@@ -28,8 +28,7 @@ use std::io;
 
 fn main() {
     let name = "Lyra";
-    let mut output = Utf8Writer::new(io::stdout());
-    html!(output, {
+    write_html!(io::stdout(), {
         p { "Hi, " $name "!" }
     }).unwrap();
 }
