@@ -1,4 +1,4 @@
-# Meet Maud
+# Maud: a fast, safe template engine for Rust
 
 Maud is an experimental template language for Rust. It's implemented as a macro, `html!`, which compiles your markup to specialized Rust code.
 
