@@ -22,13 +22,14 @@ html! {
 Literal strings use the same syntax as Rust. Wrap them in double quotes, and use a backslash for escapes.
 
 ```rust
+use maud::PreEscaped;
 html! {
     "<script>alert(\"XSS\")</script>"  // &lt;script&gt;...
-    $$"<script>alert(\"XSS\")</script>"  // <script>...
+    $PreEscaped("<script>alert(\"XSS\")</script>")  // <script>...
 }
 ```
 
-By default, HTML special characters are escaped automatically. Add a `$$` prefix to disable this escaping. (This is a special case of the *splice* syntax described below.)
+By default, HTML special characters are escaped automatically. Wrap the string in `$PreEscaped()` to disable this escaping. (This is a special case of the *splice* syntax described below.)
 
 ## Elements `p`
 
@@ -69,14 +70,17 @@ Use `$foo` syntax to splice in the value of `foo`. You can splice any value that
 [Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
 
 ```rust
-let pre_escaped = "<p>Pre-escaped</p>";
+use maud::PreEscaped;
+let post = "<p>Pre-escaped</p>";
 html! {
     h1 "My super duper blog post"
-    $$pre_escaped
+    $PreEscaped(post)
 }
 ```
 
-Maud escapes HTML special characters by default. To disable this escaping, use a `$$` prefix instead.
+Maud escapes HTML special characters by default. To disable this escaping, use the [`PreEscaped`][PreEscaped] wrapper.
+
+[PreEscaped]: https://lambda.xyz/maud/doc/maud/struct.PreEscaped.html
 
 ```rust
 let numbers = [1, 2, 3, 4];
