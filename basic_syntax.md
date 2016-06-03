@@ -24,11 +24,15 @@ By default, HTML special characters are escaped automatically. Wrap the string i
 
 ```rust
 html! {
-    h1 "Pinkie's Brew"
+    h1 "Poem"
     p {
-        "Watch as I work my gypsy magic"
+        "Rock, you are a rock."
         br /
-        "Eye of a newt and cinnamon"
+        "Gray, you are gray,"
+        br /
+        "Like a rock, which you are."
+        br /
+        "Rock."
     }
 }
 ```
