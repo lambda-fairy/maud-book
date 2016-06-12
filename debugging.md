@@ -15,7 +15,7 @@ use std::io;
 fn main() {
     let name = "Lyra";
     html_utf8_debug!(io::stdout(), {
-        p { "Hi, " $name "!" }
+        p { "Hi, " ^name "!" }
     }).unwrap();
 }
 ```
@@ -70,6 +70,6 @@ match ::maud::Utf8Writer::new(&mut io::stdout()) {
     }
 }
 src/main.rs:10     html_utf8_debug!(io::stdout(), {
-src/main.rs:11         p { "Hi, " $name "!" }
+src/main.rs:11         p { "Hi, " ^name "!" }
 src/main.rs:12     }).unwrap();
 ```
