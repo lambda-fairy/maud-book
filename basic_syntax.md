@@ -88,17 +88,17 @@ html! {
 
 To toggle an attribute based on a boolean flag, use a `?=` suffix instead: `checked?=foo`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
 
-## Class shorthand `.foo`
+## Classes and IDs `.foo` `#bar`
 
 ```rust
 html! {
-    div.container {
+    div.container#main {
         input.big.scary.bright-red type="button" value="Launch Party Cannon" /
     }
 }
 ```
 
-Add classes to an element using `.foo` syntax. You can chain multiple classes together, and mix and match them with other attributes.
+Add classes and IDs to an element using `.foo` and `#bar` syntax. You can chain multiple classes and IDs together, and mix and match them with other attributes.
 
 ## Comments `//` `/* */`
 
