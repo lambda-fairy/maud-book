@@ -18,7 +18,7 @@ html! {
 }
 ```
 
-By default, HTML special characters are escaped automatically. Wrap the string in `^PreEscaped()` to disable this escaping. (This is a special case of the *splice* syntax described in the next section.)
+By default, HTML special characters are escaped automatically. Wrap the string in `^PreEscaped()` to disable this escaping. (This is a special case of the *splice* syntax described in the "dynamic content" section.)
 
 ## Elements `p`
 
