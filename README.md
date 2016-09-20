@@ -1,7 +1,7 @@
 # Maud: a compile-time template engine for Rust
 
 ```rust
-h1.awesome "Hello, world!"
+h1 "Hello, world!"
 p#intro {
     "This is an example of the "
     a href="https://github.com/lfairy/maud" "Maud"
