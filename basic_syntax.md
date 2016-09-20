@@ -1,5 +1,9 @@
 # Basic syntax
 
+The next few sections will outline the syntax used by Maud templates.
+
+For clarity, we will use `html! { ... }` to denote a block of markup. A working program would also need to give a destination to write to – see the [previous section](invocation.md) for details.
+
 ## Literals `""`
 
 ```rust
@@ -13,29 +17,31 @@ Literal strings use the same syntax as Rust. Wrap them in double quotes, and use
 ```rust
 use maud::PreEscaped;
 html! {
-    "<script>alert(\"XSS\")</script>"  // &lt;script&gt;...
-    ^PreEscaped("<script>alert(\"XSS\")</script>")  // <script>...
+    "<script>alert(\"XSS\")</script>"               // &lt;script&gt;...
+    (PreEscaped("<script>alert(\"XSS\")</script>"))  // <script>...
 }
 ```
 
-By default, HTML special characters are escaped automatically. Wrap the string in `^PreEscaped()` to disable this escaping. (This is a special case of the *splice* syntax described in the next section.)
+By default, HTML special characters are escaped automatically. Wrap the string in `(PreEscaped())` to disable this escaping. (This is a special case of the *splice* syntax described below.)
 
 ## Elements `p`
 
 ```rust
 html! {
-    h1 "Pinkie's Brew"
+    h1 "A hop, skip and jump"
     p {
-        "Watch as I work my gypsy magic"
+        "It's not very far"
         br /
-        "Eye of a newt and cinnamon"
+        "Just move your little rump"
+        br /
+        "You can make it if you try with a hop, skip and jump"
     }
 }
 ```
 
 Write an element using curly braces: `p { ... }`.
 
-Terminate a void element using a slash: `br /`.
+Terminate a void element using a slash: `br /`. Note that the result will be rendered with HTML syntax – `<br>` not `<br />`.
 
 ```rust
 html! {
@@ -44,6 +50,39 @@ html! {
 ```
 
 If the element has only a single child, you can omit the brackets. This shorthand works with nested elements too.
+
+## Splice syntax `(foo)`
+
+```rust
+let best_pony = "Pinkie Pie";
+let numbers = [1, 2, 3, 4];
+html! {
+    p { "Hi, " (best_pony) "!" }
+    p {
+        "I have " (numbers.len()) " numbers, "
+        "and the first one is " (numbers[0])
+    }
+}
+```
+
+Use `(foo)` syntax to splice in the value of `foo` at runtime.
+
+You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box.
+
+[Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
+
+```rust
+use maud::PreEscaped;
+let post = "<p>Pre-escaped</p>";
+html! {
+    h1 "My super duper blog post"
+    (PreEscaped(post))
+}
+```
+
+Maud escapes HTML special characters by default. To disable this escaping, use the [`PreEscaped`][PreEscaped] wrapper.
+
+[PreEscaped]: https://lambda.xyz/maud/maud/struct.PreEscaped.html
 
 ## Non-empty attributes `id="yay"`
 
@@ -59,7 +98,31 @@ html! {
 
 Add attributes using the syntax: `attr="value"`. You can attach any number of attributes to an element. The values must be quoted: they are parsed as string literals.
 
-## Empty attributes `checked?` `disabled?=foo`
+## Splices in attributes `title=(secret_message)`
+
+```rust
+let secret_message = "Surprise!";
+html! {
+    p title=(secret_message) {
+        "Nothing to see here, move along."
+    }
+}
+```
+
+Splices work in attributes as well.
+
+```rust
+const GITHUB: &'static str = "https://github.com";
+html! {
+    a href={ (GITHUB) "/lfairy/maud" } {
+        "Fork me on GitHub"
+    }
+}
+```
+
+To concatenate multiple values within an attribute, wrap the whole thing in braces. This syntax is useful for building URLs.
+
+## Empty attributes `checked?` `disabled?(foo)`
 
 ```rust
 html! {
@@ -76,13 +139,13 @@ Declare an empty attribute using a `?` suffix: `checked?`.
 ```rust
 let allow_editing = true;
 html! {
-    p contenteditable?=allow_editing {
+    p contenteditable?(allow_editing) {
         "Edit me, I " em "dare" " you."
     }
 }
 ```
 
-To toggle an attribute based on a boolean flag, use a `?=` suffix instead: `checked?=foo`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
+To toggle an attribute based on a boolean flag, use a `?()` suffix instead: `checked?(foo)`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
 
 ## Comments `//` `/* */`
 
