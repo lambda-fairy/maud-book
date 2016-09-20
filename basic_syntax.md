@@ -17,7 +17,7 @@ Literal strings use the same syntax as Rust. Wrap them in double quotes, and use
 ```rust
 use maud::PreEscaped;
 html! {
-    "<script>alert(\"XSS\")</script>"               // &lt;script&gt;...
+    "<script>alert(\"XSS\")</script>"                // &lt;script&gt;...
     (PreEscaped("<script>alert(\"XSS\")</script>"))  // <script>...
 }
 ```
@@ -28,13 +28,15 @@ By default, HTML special characters are escaped automatically. Wrap the string i
 
 ```rust
 html! {
-    h1 "A hop, skip and jump"
+    h1 "Poem"
     p {
-        "It's not very far"
+        "Rock, you are a rock."
         br /
-        "Just move your little rump"
+        "Gray, you are gray,"
         br /
-        "You can make it if you try with a hop, skip and jump"
+        "Like a rock, which you are."
+        br /
+        "Rock."
     }
 }
 ```
@@ -146,6 +148,18 @@ html! {
 ```
 
 To toggle an attribute based on a boolean flag, use a `?()` suffix instead: `checked?(foo)`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
+
+## Classes and IDs `.foo` `#bar`
+
+```rust
+html! {
+    div.container#main {
+        input.big.scary.bright-red type="button" value="Launch Party Cannon" /
+    }
+}
+```
+
+Add classes and IDs to an element using `.foo` and `#bar` syntax. You can chain multiple classes and IDs together, and mix and match them with other attributes.
 
 ## Comments `//` `/* */`
 
