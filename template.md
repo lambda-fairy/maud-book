@@ -4,4 +4,4 @@ As your project grows larger, it can become useful to factor out common parts of
 
 TODO explain the [Template] trait, along with everything else
 
-[Template]: https://lambda.xyz/maud/maud/struct.Template.html
+[Template]: https://lambda.xyz/maud/maud/trait.Template.html
