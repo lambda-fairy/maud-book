@@ -2,8 +2,6 @@
 
 The next few sections will outline the syntax used by Maud templates.
 
-For clarity, we will use `html! { ... }` to denote a block of markup. A working program would also need to give a destination to write to – see the [previous section](invocation.md) for details.
-
 ## Literals `""`
 
 ```rust

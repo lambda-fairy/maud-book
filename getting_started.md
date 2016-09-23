@@ -27,13 +27,16 @@ use std::io;
 
 fn main() {
     let name = "Lyra";
-    html_utf8!(io::stdout(), {
+    let markup = html! {
         p { "Hi, " (name) "!" }
-    }).unwrap();
+    };
+    println!("{}", markup.into_string());
 }
 ```
 
-`html_utf8!` takes two arguments. The first argument is a writer, in this case `io::stdout()`. The second argument is a template using Maud's custom syntax.
+`html!` takes a single argument: a template using Maud's custom syntax. This call expands to an expression of type [`Markup`][Markup], which can then be converted to a `String` using `.into_string()`.
+
+[Markup]: https://lambda.xyz/maud/maud/type.Markup.html
 
 Run this program with `cargo run`, and you'll (hopefully) get the following:
 

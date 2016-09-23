@@ -1,11 +1,13 @@
 # Maud: a compile-time template engine for Rust
 
 ```rust
-h1 "Hello, world!"
-p#intro {
-    "This is an example of the "
-    a href="https://github.com/lfairy/maud" "Maud"
-    " template language."
+html! {
+    h1 "Hello, world!"
+    p.intro {
+        "This is an example of the "
+        a href="https://github.com/lfairy/maud" "Maud"
+        " template language."
+    }
 }
 ```
 
@@ -23,7 +25,7 @@ Your templates are checked by the compiler, just like the code around them. Any 
 
 ### Minimal runtime
 
-Since most of the work happens at compile time, the runtime footprint is small. Templates never perform unnecessary allocations, and their performance rivals that of hand-written code. The Maud runtime library, including integration with the [Iron] web framework, is under 140 SLoC.
+Since most of the work happens at compile time, the runtime footprint is small. The Maud runtime library, including integration with the [Iron] web framework, is under 100 SLoC.
 
 [Iron]: http://ironframework.io/
 
@@ -37,9 +39,10 @@ There is no need to track separate template files, since all relevant code is li
 
 Maud depends on the unstable [syntax extension API], and so you'll need to install the Nightly version of Rust to use it.
 
-There is a new—stable—macro API in the works, but it'll be a while before that's ready.
+There is a new—stable—macro API [in the works][macros 2.0], but it'll be a while before that's ready.
 
 [syntax extension API]: https://doc.rust-lang.org/book/compiler-plugins.html
+[macros 2.0]: http://www.ncameron.org/blog/macros-in-rust-pt5/
 
 ### Tight integration with Rust
 

@@ -36,7 +36,7 @@ html! {
     p {
         "Hello, "
         @if let Some(name) = user {
-            ^name
+            (name)
         } @else {
             "stranger"
         }
