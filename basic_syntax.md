@@ -51,7 +51,7 @@ html! {
 
 If the element has only a single child, you can omit the brackets. This shorthand works with nested elements too.
 
-## Splice syntax `(foo)`
+## Splices `(foo)`
 
 ```rust
 let best_pony = "Pinkie Pie";
