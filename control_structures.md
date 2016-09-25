@@ -53,7 +53,7 @@ html! {
     p "My favorite ponies are:"
     ol {
         @for name in &names {
-            li ^name
+            li (name)
         }
     }
 }
