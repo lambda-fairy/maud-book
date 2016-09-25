@@ -7,3 +7,4 @@
 * [Streaming content using `RenderOnce`](render_once.md)
 * [Using Iron with Maud](iron.md)
 * [Debugging](debugging.md)
+* [Frequently asked questions](faq.md)

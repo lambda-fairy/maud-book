@@ -40,3 +40,5 @@ fn main() {
     }).http("localhost:3000").unwrap();
 }
 ```
+
+`Markup` will set the content type of the response automatically, so you don't need to add it yourself.
