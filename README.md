@@ -11,7 +11,9 @@ html! {
 }
 ```
 
-Maud is an HTML template engine for Rust. It's implemented as a macro, `html!`, which compiles your markup to specialized Rust code. This unique approach makes Maud templates blazing fast, super type-safe, and easy to deploy.
+Maud is an HTML [template engine] for Rust. It's implemented as a macro, `html!`, which compiles your markup to specialized Rust code. This unique approach makes Maud templates blazing fast, super type-safe, and easy to deploy.
+
+[template engine]: https://www.simple-is-better.org/template/
 
 ## Why use Maud?
 
