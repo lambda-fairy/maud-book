@@ -29,13 +29,12 @@ $ cargo build
 warning: expansion:
 {
     let mut __maud_writer = ::std::string::String::new();
-    let _ = __maud_writer.push_str("<p>Hi, ");
-    let _ =
-        {
-            use ::maud::RenderOnce;
-            name.render_once(&mut __maud_writer)
-        };
-    let _ = __maud_writer.push_str("!</p>");
+    __maud_writer.push_str("<p>Hi, ");
+    {
+        use ::maud::RenderOnce;
+        name.render_once(&mut __maud_writer)
+    };
+    __maud_writer.push_str("!</p>");
     ::maud::PreEscaped(__maud_writer)
 }
   --> src/main.rs:8:18

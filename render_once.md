@@ -8,4 +8,4 @@ This use case is supported through [`RenderOnce`][RenderOnce]:
 
 TODO: add an example
 
-[RenderOnce]: https://lambda.xyz/maud/doc/maud/trait.RenderOnce.html
+[RenderOnce]: https://docs.rs/maud/*/maud/trait.RenderOnce.html
