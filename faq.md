@@ -22,6 +22,6 @@ For these reasons, I changed `html!` to return a `String` in version 0.11.
 
 ## Why is Maud written as a compiler plugin? Can't it use `macro_rules!` instead?
 
-This is certainly possible, and in fact the [Horrorshow](https://github.com/Stebalien/horrorshow) library works this way.
+This is certainly possible, and in fact the [Horrorshow](https://github.com/Stebalien/horrorshow-rs) library works this way.
 
 I use compiler plugins because they are more flexible. There are some syntax constructs in Maud that cannot be parsed with `macro_rules!`; better diagnostics are a bonus as well.
