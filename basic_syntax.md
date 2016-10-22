@@ -67,9 +67,10 @@ html! {
 
 Use `(foo)` syntax to splice in the value of `foo` at runtime.
 
-You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box.
+You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box. To change this behavior for some type, you can implement the [`Render`][Render] trait by hand. See the [traits](./traits.md) section for details.
 
 [Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
+[Render]: https://docs.rs/maud/*/maud/trait.Render.html
 
 ```rust
 use maud::PreEscaped;
