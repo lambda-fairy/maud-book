@@ -2,7 +2,7 @@
 
 By default, a `(splice)` is rendered using the [`std::fmt::Display`][Display] trait, with any HTML special characters escaped automatically.
 
-To change this behavior, you can implement the [`Render`][Render] trait for your type. Then, when a value of this type is used in a template, Maud will call your custom code instead.
+To change this behavior, implement the [`Render`][Render] trait for your type. Then, when a value of this type is used in a template, Maud will call your custom code instead.
 
 Below are some examples of using `Render`. Feel free to use these snippets in your own project!
 
@@ -46,15 +46,31 @@ impl<T: fmt::Debug> Render for Debug<T> {
 }
 ```
 
-## `RenderOnce`
+## Example: rendering Markdown using `pulldown-cmark`
 
-The `Render` trait takes its argument by reference (`&self`). But sometimes, we need to take the parameter by value instead.
+[`pulldown-cmark`][pulldown-cmark] is a popular library for converting Markdown to HTML. It would be useful to call this library from within a Maud template.
 
-This use case is supported through the [`RenderOnce`][RenderOnce] trait.
+There's just one problem: the provided [`push_html`][push_html] function takes its input by value, not by reference. This means that the `Render` trait, which takes its argument by reference (`&self`), will not work with this function.
 
-TODO: include an example
+To get around this issue, we can implement the [`RenderOnce`][RenderOnce] trait instead. This trait differs from `Render` in that it consumes the rendered value. This is exactly what we need for `pulldown-cmark`.
+
+```rust
+use maud::RenderOnce;
+use pulldown_cmark::{Event, html};
+
+/// Renders a stream of events from `pulldown-cmark`.
+struct Markdown<'a, I: Iterator<Item=Event<'a>>>(I);
+
+impl<'a, I: Iterator<Item=Event<'a>>> RenderOnce for Markdown<'a, I> {
+    fn render_once_to(self, buffer: &mut String) {
+        html::push_html(buffer, self.0);
+    }
+}
+```
 
 [Debug]: https://doc.rust-lang.org/std/fmt/trait.Debug.html
 [Display]: https://doc.rust-lang.org/std/fmt/trait.Display.html
 [Render]: https://docs.rs/maud/*/maud/trait.Render.html
 [RenderOnce]: https://docs.rs/maud/*/maud/trait.RenderOnce.html
+[pulldown-cmark]: https://docs.rs/pulldown-cmark/0.0.8/pulldown_cmark/index.html
+[push_html]: https://docs.rs/pulldown-cmark/0.0.8/pulldown_cmark/html/fn.push_html.html
