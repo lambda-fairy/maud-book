@@ -9,8 +9,8 @@ To enable this support, enable the "iron" feature via Cargo:
 ```toml
 # ...
 [dependencies]
-maud = { version = "0.11", features = ["iron"] }
-maud_macros = "0.11"
+maud = { version = "*", features = ["iron"] }
+maud_macros = "*"
 # ...
 ```
 
