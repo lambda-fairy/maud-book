@@ -81,22 +81,9 @@ html! {
         Princess::Celestia => {
             p "Sister, please stop reading my diary. It's rude."
         },
-        _ => {
-            p "Nothing to see here; move along."
-        }
+        _ => p "Nothing to see here; move along."
     }
 }
 ```
 
 Pattern matching is supported with `@match`.
-
-Note that the body of each branch must be delimited by braces `{}`. This means that the following won't work:
-
-```rust
-// This won't work!
-@match user {
-    // ...
-    Princess::Celestia => p "..."
-    // ...
-}
-```
