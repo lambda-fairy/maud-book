@@ -65,7 +65,7 @@ html! {
 }
 ```
 
-Use `(foo)` syntax to splice in the value of `foo` at runtime.
+Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default.
 
 You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box. To change this behavior for some type, you can implement the [`Render`][Render] trait by hand. See the [traits](./traits.md) section for details.
 
@@ -81,7 +81,7 @@ html! {
 }
 ```
 
-Maud escapes HTML special characters by default. To disable this escaping, use the [`PreEscaped`][PreEscaped] wrapper.
+To disable automatic escaping, use the [`PreEscaped`][PreEscaped] wrapper.
 
 [PreEscaped]: https://lambda.xyz/maud/maud/struct.PreEscaped.html
 
