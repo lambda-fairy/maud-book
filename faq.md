@@ -14,9 +14,9 @@ Here are some reasons why I chose this name:
 
 ## Why does `html!` always allocate a `String`? Wouldn't it be more efficient if it wrote to a handle directly?
 
-Good question! In fact, Maud did work this way in the past; but in the end I found it was better to drop this feature.
+Good question! In fact, Maud did work this way in the past.
 
-First, having to deal with an extra "writer" argument added to the cognitive overhead of the library, more so when features like sub-templates were involved. Furthermore, since frameworks like Iron need to take ownership of the response body, we often ended up having to allocate anyway. To put the nail in the coffin, benchmarks showed that a `String` based solution is actually faster than one which avoids allocations.
+Sadly, that kind of thing didn't work out that well in practice. Having to pass the handle around made templates hard to compose, which is important in any non-trivial project. Furthermore, Iron (and other middleware frameworks) likes to take ownership of the response body, so we'd need to do some closure gymnastics to get everything to work together. To put the nail in the coffin, benchmarks showed that a `String` based solution is actually faster than one which avoids allocations.
 
 For these reasons, I changed `html!` to return a `String` in version 0.11.
 
@@ -25,3 +25,9 @@ For these reasons, I changed `html!` to return a `String` in version 0.11.
 This is certainly possible, and in fact the [Horrorshow](https://github.com/Stebalien/horrorshow-rs) library works this way.
 
 I use compiler plugins because they are more flexible. There are some syntax constructs in Maud that cannot be parsed with `macro_rules!`; better diagnostics are a bonus as well.
+
+## Why doesn't Maud implement [context-aware escaping](https://security.googleblog.com/2009/03/reducing-xss-by-way-of-automatic.html)?
+
+If a project follows best practices in separating HTML and CSS/JavaScript, then context-aware escaping is unnecessary.
+
+Google uses context-aware escaping because it has a large, decades-old code base, much of it written before these best practices were well known. Any project that uses Maud is neither large nor decades-old, and so should not have the need for this feature.
