@@ -123,7 +123,7 @@ html! {
 
 To concatenate multiple values within an attribute, wrap the whole thing in braces. This syntax is useful for building URLs.
 
-## Empty attributes `checked?` `disabled?(foo)`
+## Empty attributes `checked?` `disabled?[foo]`
 
 ```rust
 html! {
@@ -140,13 +140,13 @@ Declare an empty attribute using a `?` suffix: `checked?`.
 ```rust
 let allow_editing = true;
 html! {
-    p contenteditable?(allow_editing) {
+    p contenteditable?[allow_editing] {
         "Edit me, I " em "dare" " you."
     }
 }
 ```
 
-To toggle an attribute based on a boolean flag, use a `?()` suffix instead: `checked?(foo)`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
+To toggle an attribute based on a boolean flag, use a `?[]` suffix instead: `checked?[foo]`. This will check the value of `foo` at runtime, inserting the attribute only if `foo` is `true`.
 
 ## Classes and IDs `.foo` `#bar`
 
