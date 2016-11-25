@@ -61,6 +61,27 @@ html! {
 
 Use `@for .. in ..` to loop over the elements of an iterator.
 
+## Declaring variables with `@let`
+
+```rust
+let names = ["Applejack", "Rarity", "Fluttershy"];
+html! {
+    @for name in &names {
+        @let first_letter = name.chars().next().unwrap() {
+            p {
+                "The first letter of "
+                b (name)
+                " is "
+                b (first_letter)
+                "."
+            }
+        }
+    }
+}
+```
+
+Declare a new variable within a template using `@let`. This is useful when working with values in a for loop.
+
 ## Matching with `@match`
 
 ```rust
