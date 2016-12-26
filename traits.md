@@ -4,7 +4,7 @@ By default, a `(splice)` is rendered using the [`std::fmt::Display`][Display] tr
 
 To change this behavior, implement the [`Render`][Render] trait for your type. Then, when a value of this type is used in a template, Maud will call your custom code instead.
 
-Below are some examples of using `Render`. Feel free to use these snippets in your own project!
+Below are some examples of using `Render`. Feel free to use these snippets in your own project! For more examples, take a look at the [`maud_extras`][maud_extras] crate.
 
 ## Example: a shorthand for including CSS stylesheets
 
@@ -46,31 +46,38 @@ impl<T: fmt::Debug> Render for Debug<T> {
 }
 ```
 
-## Example: rendering Markdown using `pulldown-cmark`
+## Example: rendering Markdown using `pulldown-cmark` and `ammonia`
 
-[`pulldown-cmark`][pulldown-cmark] is a popular library for converting Markdown to HTML. It would be useful to call this library from within a Maud template.
+[`pulldown-cmark`][pulldown-cmark] is a popular library for converting Markdown to HTML.
 
-There's just one problem: the provided [`push_html`][push_html] function takes its input by value, not by reference. This means that the `Render` trait, which takes its argument by reference (`&self`), will not work with this function.
-
-To get around this issue, we can implement the [`RenderOnce`][RenderOnce] trait instead. This trait differs from `Render` in that it consumes the rendered value. This is exactly what we need for `pulldown-cmark`.
+We also use the [`ammonia`][ammonia] library, which sanitizes the resulting markup.
 
 ```rust
-use maud::RenderOnce;
-use pulldown_cmark::{Event, html};
+extern crate ammonia;
+extern crate pulldown_cmark;
 
-/// Renders a stream of events from `pulldown-cmark`.
-struct Markdown<'a, I: Iterator<Item=Event<'a>>>(I);
+use maud::{PreEscaped, Render};
+use pulldown_cmark::{Parser, html};
 
-impl<'a, I: Iterator<Item=Event<'a>>> RenderOnce for Markdown<'a, I> {
-    fn render_once_to(self, buffer: &mut String) {
-        html::push_html(buffer, self.0);
+/// Renders a block of Markdown using `pulldown-cmark`.
+struct Markdown<T: AsRef<str>>(T);
+
+impl<T: AsRef<str>> Render for Markdown<T> {
+    fn render(self, buffer: &mut String) {
+        // Generate raw HTML
+        let mut unsafe_html = String::new();
+        let parser = Parser::new(self.0.as_str());
+        html::push_html(&mut unsafe_html, parser);
+        // Sanitize it with ammonia
+        let safe_html = ammonia::clean(&unsafe_html);
+        PreEscaped(safe_html)
     }
 }
 ```
 
+[maud_extras]: https://github.com/lfairy/maud/tree/master/maud_extras
 [Debug]: https://doc.rust-lang.org/std/fmt/trait.Debug.html
 [Display]: https://doc.rust-lang.org/std/fmt/trait.Display.html
 [Render]: https://docs.rs/maud/*/maud/trait.Render.html
-[RenderOnce]: https://docs.rs/maud/*/maud/trait.RenderOnce.html
 [pulldown-cmark]: https://docs.rs/pulldown-cmark/0.0.8/pulldown_cmark/index.html
-[push_html]: https://docs.rs/pulldown-cmark/0.0.8/pulldown_cmark/html/fn.push_html.html
+[ammonia]: https://github.com/notriddle/ammonia
