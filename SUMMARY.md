@@ -5,6 +5,6 @@
 * [Basic syntax](basic_syntax.md)
 * [Control structures](control_structures.md)
 * [The `Render` trait](traits.md)
-* [Using Iron with Maud](iron.md)
+* [Web framework integration](web_frameworks.md)
 * [Debugging](debugging.md)
 * [Frequently asked questions](faq.md)
