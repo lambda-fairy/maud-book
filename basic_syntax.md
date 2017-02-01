@@ -65,7 +65,7 @@ html! {
 }
 ```
 
-Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default. Arbitrary Rust code can be included in a compound expression when there is complicated work to be done or type inference needs a little bit of help:
+Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default. Arbitrary Rust code can be included in a compound expression when a single expression would be hard to read or when Rust's type inference needs a little bit of help:
 
 ```rust
 html! {
