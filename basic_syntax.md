@@ -65,7 +65,17 @@ html! {
 }
 ```
 
-Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default.
+Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default. Arbitrary Rust code can be included in a compound expression when there is complicated work to be done or type inference needs a little bit of help:
+
+```rust
+html! {
+    p ({
+        let f:Foo = try![something()];
+        let b = f.get_bar::<Bar>();
+        b.start_time().format("%H%Mh")
+    })
+}
+```
 
 You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box. To change this behavior for some type, you can implement the [`Render`][Render] trait by hand. See the [traits](./traits.md) section for details.
 
