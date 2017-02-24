@@ -67,6 +67,17 @@ html! {
 
 Use `(foo)` syntax to splice in the value of `foo` at runtime. Any HTML special characters are escaped by default.
 
+```rust
+html! {
+    p ({
+        let f: Foo = something_convertible_to_foo()?;
+        f.time().format("%H%Mh")
+    })
+}
+```
+
+Arbitrary Rust code can be included in a slice by using a [block](https://doc.rust-lang.org/reference.html#block-expressions). This can be helpful for complex expressions that would be difficult to read otherwise. It is also helpful when Rust's type inference needs a little bit of help (e.g., convert this to a `Foo` using `From<Foo>` in the example above).
+
 You can splice any value that implements [`std::fmt::Display`][Display]. Most primitive types (such as `str` and `i32`) implement this trait, so they should work out of the box. To change this behavior for some type, you can implement the [`Render`][Render] trait by hand. See the [traits](./traits.md) section for details.
 
 [Display]: http://doc.rust-lang.org/std/fmt/trait.Display.html
