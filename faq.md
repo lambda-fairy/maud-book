@@ -26,6 +26,10 @@ This is certainly possible, and in fact the [Horrorshow](https://github.com/Steb
 
 I use compiler plugins because they are more flexible. There are some syntax constructs in Maud that cannot be parsed with `macro_rules!`; better diagnostics are a bonus as well.
 
+## Maud has had a lot of releases so far. When will it reach 1.0?
+
+I plan to make a 1.0 release when the library can be used on stable Rust.
+
 ## Why doesn't Maud implement [context-aware escaping](https://security.googleblog.com/2009/03/reducing-xss-by-way-of-automatic.html)?
 
 If a project follows best practices in separating HTML and CSS/JavaScript, then context-aware escaping is unnecessary.
