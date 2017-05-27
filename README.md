@@ -27,9 +27,10 @@ Your templates are checked by the compiler, just like the code around them. Any 
 
 ### Minimal runtime
 
-Since most of the work happens at compile time, the runtime footprint is small. The Maud runtime library, including integration with the [Iron] web framework, is less than 100 SLoC.
+Since most of the work happens at compile time, the runtime footprint is small. The Maud runtime library, including integration with the [Iron] and [Rocket] web frameworks, is around 100 SLoC.
 
 [Iron]: http://ironframework.io/
+[Rocket]: https://rocket.rs/
 
 ### Simple deployment
 
