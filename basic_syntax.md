@@ -94,7 +94,7 @@ html! {
 
 To disable automatic escaping, use the [`PreEscaped`][PreEscaped] wrapper.
 
-[PreEscaped]: https://lambda.xyz/maud/maud/struct.PreEscaped.html
+[PreEscaped]: https://docs.rs/maud/*/maud/struct.PreEscaped.html
 
 ## Non-empty attributes `id="yay"`
 
