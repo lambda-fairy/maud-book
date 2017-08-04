@@ -40,12 +40,9 @@ There is no need to track separate template files, since all relevant code is li
 
 ### Requires Nightly compiler
 
-Maud depends on the unstable [syntax extension API], and so you'll need to install the Nightly version of Rust to use it.
+Maud depends on the unstable [procedural macro API], and so you'll need to install the nightly version of Rust to use it.
 
-There is a new—stable—macro API [in the works][procedural macros], but it'll be a while before that's ready.
-
-[syntax extension API]: https://doc.rust-lang.org/book/compiler-plugins.html
-[procedural macros]: https://github.com/rust-lang/rust/issues/38356
+[procedural macro API]: https://github.com/rust-lang/rust/issues/38356
 
 ### Longer compile times
 
