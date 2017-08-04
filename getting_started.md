@@ -16,8 +16,6 @@ Now save the following to `src/main.rs`:
 extern crate maud;
 use maud::html;
 
-use std::io;
-
 fn main() {
     let name = "Lyra";
     let markup = html! {
