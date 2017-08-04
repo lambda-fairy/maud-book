@@ -14,23 +14,20 @@ To keep dependencies minimal, Iron support is disabled by default. To enable it,
 # ...
 [dependencies]
 maud = { version = "*", features = ["iron"] }
-maud_macros = "*"
 # ...
 ```
-
-Note that the feature must be enabled on the `maud` runtime library, *not* `maud_macros`.
 
 With this feature enabled, you can then build a `Response` from a `Markup` object directly. Here's an example application using Iron and Maud:
 
 ```rust
-#![feature(plugin)]
-#![plugin(maud_macros)]
+#![feature(proc_macro)]
 
 extern crate iron;
 extern crate maud;
 
 use iron::prelude::*;
 use iron::status;
+use maud::html;
 
 fn main() {
     Iron::new(|r: &mut Request| {
@@ -55,7 +52,6 @@ Rocket works in a similar way, except using the `rocket` feature:
 # ...
 [dependencies]
 maud = { version = "*", features = ["rocket"] }
-maud_macros = "*"
 # ...
 ```
 
@@ -63,13 +59,13 @@ This adds a `Responder` implementation for the `Markup` type, so you can return 
 
 ```rust
 #![feature(plugin)]
-#![plugin(maud_macros)]
+#![feature(proc_macro)]
 #![plugin(rocket_codegen)]
 
 extern crate maud;
 extern crate rocket;
 
-use maud::Markup;
+use maud::{html, Markup};
 
 #[get("/<name>")]
 fn hello(name: &str) -> Markup {
@@ -89,12 +85,12 @@ fn main() {
 Unlike with the other frameworks, Rouille doesn't need any extra features at all! Calling `Response::html` on the rendered `Markup` will Just Work®.
 
 ```rust
-#![feature(plugin)]
-#![plugin(maud_macros)]
+#![feature(proc_macro)]
 
 extern crate maud;
 #[macro_use] extern crate rouille;
 
+use maud::html;
 use rouille::Response;
 
 fn main() {
