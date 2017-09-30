@@ -10,7 +10,7 @@ Here are some reasons why I chose this name:
 
 * The library is efficient and austere, like the character;
 
-* There is a notable website called ["HTML5 Rocks"](http://www.html5rocks.com), and Maud (the character) is a geologist.
+* Google used to maintain a site called ["HTML5 Rocks"](https://techcrunch.com/2010/06/22/html5rocks-google/), and Maud (the character) is a geologist.
 
 ## Why does `html!` always allocate a `String`? Wouldn't it be more efficient if it wrote to a handle directly?
 
