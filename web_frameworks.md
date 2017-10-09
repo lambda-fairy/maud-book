@@ -66,9 +66,10 @@ extern crate maud;
 extern crate rocket;
 
 use maud::{html, Markup};
+use std::borrow::Cow;
 
 #[get("/<name>")]
-fn hello(name: &str) -> Markup {
+fn hello<'a>(name: Cow<'a, str>) -> Markup {
     html! {
         h1 { "Hello, " (name) "!" }
         p "Nice to meet you!"
