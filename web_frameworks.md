@@ -1,14 +1,60 @@
 # Web framework integration
 
-Maud includes support for these web frameworks: [Iron], [Rocket], and [Rouille].
+Maud includes support for these web frameworks: [Actix], [Iron], [Rocket], and [Rouille].
 
+[Actix]: https://actix.rs/
 [Iron]: http://ironframework.io
 [Rocket]: https://rocket.rs/
 [Rouille]: https://github.com/tomaka/rouille
 
+# Actix
+
+Actix support is available with the "actix-web" feature:
+
+```toml
+# ...
+[dependencies]
+maud = { version = "*", features = ["actix-web"] }
+# ...
+```
+
+Actix request handlers can use a `Markup` that implements the `actix_web::Responder` trait.
+
+```rust
+#![feature(proc_macro)]
+#![feature(proc_macro_non_items)]
+
+extern crate actix;
+extern crate actix_web;
+extern crate maud;
+
+use maud::{html, Markup};
+use actix_web::{App, server, Path, http::Method};
+
+fn index(params: Path<(String, u32)>) -> Markup {
+    html! {
+        body h1 { "Hello " (params.0) " with id " (params.1) "!"}
+    }
+}
+
+fn main() { 
+    let sys = actix::System::new("maud-example");
+
+    server::new(move || {
+        App::new()
+            .resource("/user/{name}/{id}", |r| {
+                r.method(Method::GET).with(index)
+            })
+    }).bind("127.0.0.1:8080")
+        .unwrap()
+        .start();
+    let _ = sys.run();
+}
+```
+
 # Iron
 
-To keep dependencies minimal, Iron support is disabled by default. To enable it, use the "iron" feature via Cargo:
+Iron support is available with the "iron" feature:
 
 ```toml
 # ...
@@ -21,6 +67,7 @@ With this feature enabled, you can then build a `Response` from a `Markup` objec
 
 ```rust
 #![feature(proc_macro)]
+#![feature(proc_macro_non_items)]
 
 extern crate iron;
 extern crate maud;
@@ -59,8 +106,9 @@ This adds a `Responder` implementation for the `Markup` type, so you can return 
 
 ```rust
 #![feature(plugin)]
-#![feature(proc_macro)]
 #![plugin(rocket_codegen)]
+#![feature(proc_macro)]
+#![feature(proc_macro_non_items)]
 
 extern crate maud;
 extern crate rocket;
@@ -87,6 +135,7 @@ Unlike with the other frameworks, Rouille doesn't need any extra features at all
 
 ```rust
 #![feature(proc_macro)]
+#![feature(proc_macro_non_items)]
 
 extern crate maud;
 #[macro_use] extern crate rouille;
