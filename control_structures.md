@@ -14,16 +14,16 @@ let user = Princess::Celestia;
 
 html! {
     @if user == Princess::Luna {
-        h1 "Super secret woona to-do list"
+        h1 { "Super secret woona to-do list" }
         ul {
-            li "Nuke the Crystal Empire"
-            li "Kick a puppy"
-            li "Evil laugh"
+            li { "Nuke the Crystal Empire" }
+            li { "Kick a puppy" }
+            li { "Evil laugh" }
         }
     } @else if user == Princess::Celestia {
-        p "Sister, please stop reading my diary. It's rude."
+        p { "Sister, please stop reading my diary. It's rude." }
     } @else {
-        p "Nothing to see here; move along."
+        p { "Nothing to see here; move along." }
     }
 }
 ```
@@ -52,10 +52,10 @@ Use `@for .. in ..` to loop over the elements of an iterator.
 ```rust
 let names = ["Applejack", "Rarity", "Fluttershy"];
 html! {
-    p "My favorite ponies are:"
+    p { "My favorite ponies are:" }
     ol {
         @for name in &names {
-            li (name)
+            li { (name) }
         }
     }
 }
@@ -72,9 +72,9 @@ html! {
         @let first_letter = name.chars().next().unwrap();
         p {
             "The first letter of "
-            b (name)
+            b { (name) }
             " is "
-            b (first_letter)
+            b { (first_letter) }
             "."
         }
     }
@@ -93,17 +93,17 @@ let user = Princess::Celestia;
 html! {
     @match user {
         Princess::Luna => {
-            h1 "Super secret woona to-do list"
+            h1 { "Super secret woona to-do list" }
             ul {
-                li "Nuke the Crystal Empire"
-                li "Kick a puppy"
-                li "Evil laugh"
+                li { "Nuke the Crystal Empire" }
+                li { "Kick a puppy" }
+                li { "Evil laugh" }
             }
         },
         Princess::Celestia => {
-            p "Sister, please stop reading my diary. It's rude."
+            p { "Sister, please stop reading my diary. It's rude." }
         },
-        _ => p "Nothing to see here; move along."
+        _ => p { "Nothing to see here; move along." }
     }
 }
 ```

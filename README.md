@@ -2,10 +2,10 @@
 
 ```rust
 html! {
-    h1 "Hello, world!"
+    h1 { "Hello, world!" }
     p.intro {
         "This is an example of the "
-        a href="https://github.com/lfairy/maud" "Maud"
+        a href="https://github.com/lfairy/maud" { "Maud" }
         " template language."
     }
 }

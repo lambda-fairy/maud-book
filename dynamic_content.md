@@ -18,10 +18,12 @@ Arbitrary Rust code can be included in a splice by using a [block](https://doc.r
 
 ```rust
 html! {
-    p ({
-        let f: Foo = something_convertible_to_foo()?;
-        f.time().format("%H%Mh")
-    })
+    p {
+        ({
+            let f: Foo = something_convertible_to_foo()?;
+            f.time().format("%H%Mh")
+        })
+    }
 }
 ```
 
@@ -59,7 +61,7 @@ To change this behavior for some type, you can implement the [`Render`][Render] 
 use maud::PreEscaped;
 let post = "<p>Pre-escaped</p>";
 html! {
-    h1 "My super duper blog post"
+    h1 { "My super duper blog post" }
     (PreEscaped(post))
 }
 ```

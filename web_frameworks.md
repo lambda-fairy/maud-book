@@ -32,7 +32,7 @@ use maud::html;
 fn main() {
     Iron::new(|r: &mut Request| {
         let markup = html! {
-            h1 "Hello, world!"
+            h1 { "Hello, world!" }
             p {
                 "You are viewing the page at " (r.url)
             }
@@ -72,7 +72,7 @@ use std::borrow::Cow;
 fn hello<'a>(name: Cow<'a, str>) -> Markup {
     html! {
         h1 { "Hello, " (name) "!" }
-        p "Nice to meet you!"
+        p { "Nice to meet you!" }
     }
 }
 
@@ -100,7 +100,7 @@ fn main() {
             (GET) (/{name: String}) => {
                 html! {
                     h1 { "Hello, " (name) "!" }
-                    p "Nice to meet you!"
+                    p { "Nice to meet you!" }
                 }
             },
             _ => Response::empty_404()

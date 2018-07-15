@@ -34,7 +34,7 @@ Terminate a void element using a semicolon: `br;`. Note that the result will be 
 
 ```rust
 html! {
-    h1 "Poem"
+    h1 { "Poem" }
     p {
         "Rock, you are a rock."
         br;
@@ -51,15 +51,9 @@ Maud also supports ending a void element with a slash: `br /`. This syntax is [d
 
 [#96]: https://github.com/lfairy/maud/pull/96
 
-### Nested elements `p small em`
+Before version 0.18, Maud allowed the curly braces to be omitted. This syntax was [removed][#137] and now causes an error instead.
 
-If the element has only a single child, you can omit the brackets. This shorthand works with nested elements too.
-
-```rust
-html! {
-    p small em "squee"
-}
-```
+[#137]: https://github.com/lfairy/maud/pull/137
 
 ## Non-empty attributes `id="yay"`
 
@@ -84,7 +78,7 @@ html! {
     form {
         input type="checkbox" name="cupcakes" checked?;
         " "
-        label for="cupcakes" "Do you like cupcakes?"
+        label for="cupcakes" { "Do you like cupcakes?" }
     }
 }
 ```
@@ -95,7 +89,9 @@ To toggle an attribute based on a boolean flag, use a `?[]` suffix instead: `che
 let allow_editing = true;
 html! {
     p contenteditable?[allow_editing] {
-        "Edit me, I " em "dare" " you."
+        "Edit me, I "
+        em { "dare" }
+        " you."
     }
 }
 ```
@@ -117,7 +113,7 @@ To toggle a class based on a boolean flag, use a `[]` suffix: `.foo[is_foo]`. Th
 ```rust
 let cuteness = 95;
 html! {
-    p.cute[cuteness > 50] "Squee!"
+    p.cute[cuteness > 50] { "Squee!" }
 }
 ```
 
@@ -126,7 +122,7 @@ html! {
 ```rust
 html! {
     // This text is ignored
-    p "Hello!"
+    p { "Hello!" }
     /* This as well */
 }
 ```
