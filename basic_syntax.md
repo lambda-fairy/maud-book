@@ -60,9 +60,16 @@ Before version 0.18, Maud allowed the curly braces to be omitted. This syntax wa
 ```rust
 html! {
     ul {
-        li a href="about:blank" "Apple Bloom"
-        li class="lower-middle" "Sweetie Belle"
-        li dir="rtl" { "Scootaloo " small "(also a chicken)" }
+        li {
+            a href="about:blank" { "Apple Bloom" }
+        }
+        li class="lower-middle" {
+            "Sweetie Belle"
+        }
+        li dir="rtl" {
+            "Scootaloo "
+            small { "(also a chicken)" }
+        }
     }
 }
 ```
