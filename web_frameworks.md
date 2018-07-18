@@ -21,8 +21,8 @@ maud = { version = "*", features = ["actix-web"] }
 Actix request handlers can use a `Markup` that implements the `actix_web::Responder` trait.
 
 ```rust
-#![feature(proc_macro)]
 #![feature(proc_macro_non_items)]
+#![feature(use_extern_macros)]
 
 extern crate actix;
 extern crate actix_web;
@@ -67,8 +67,8 @@ maud = { version = "*", features = ["iron"] }
 With this feature enabled, you can then build a `Response` from a `Markup` object directly. Here's an example application using Iron and Maud:
 
 ```rust
-#![feature(proc_macro)]
 #![feature(proc_macro_non_items)]
+#![feature(use_extern_macros)]
 
 extern crate iron;
 extern crate maud;
@@ -108,8 +108,8 @@ This adds a `Responder` implementation for the `Markup` type, so you can return 
 ```rust
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
-#![feature(proc_macro)]
 #![feature(proc_macro_non_items)]
+#![feature(use_extern_macros)]
 
 extern crate maud;
 extern crate rocket;
@@ -135,8 +135,8 @@ fn main() {
 Unlike with the other frameworks, Rouille doesn't need any extra features at all! Calling `Response::html` on the rendered `Markup` will Just Work®.
 
 ```rust
-#![feature(proc_macro)]
 #![feature(proc_macro_non_items)]
+#![feature(use_extern_macros)]
 
 extern crate maud;
 #[macro_use] extern crate rouille;
