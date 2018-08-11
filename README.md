@@ -40,12 +40,12 @@ There is no need to track separate template files, since all relevant code is li
 
 ### Requires Nightly compiler
 
-Maud depends on the unstable [procedural macro API], and so you'll need to install the nightly version of Rust to use it.
+Maud uses unstable parts of the [procedural macro API], and so you'll need to install the nightly version of Rust to use it.
 
 [procedural macro API]: https://github.com/rust-lang/rust/issues/38356
 
 ### Longer compile times
 
-It can be inconvenient to iterate on a design, since every edit would trigger a recompile of the containing crate. When [incremental compilation] lands, though, the difference may not be as noticeable as you'd think.
+It can be inconvenient to iterate on a design, since every edit would trigger a recompile of the containing crate. With [incremental compilation], though, the difference may not be as noticeable as you'd think.
 
-[incremental compilation]: https://blog.rust-lang.org/2016/09/08/incremental.html
+[incremental compilation]: https://blog.rust-lang.org/2018/02/15/Rust-1.24.html#incremental-compilation
