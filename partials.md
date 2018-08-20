@@ -1,8 +1,8 @@
 # Partials
 
-Maud does not have a built-in concept of partials or sub templates. Instead, you can compose your markup with any function that returns `Markup`.
+Maud does not have a built-in concept of partials or sub-templates. Instead, you can compose your markup with any function that returns `Markup`.
 
-The following uses a `header` and `footer` function that are used in the `page` function to return a final result.
+The following example uses a `header` and `footer` function that are used in the `page` function to return a final result.
 
 Here is a page that has a dynamic page title, a body and a footer with an RSS link:
 
