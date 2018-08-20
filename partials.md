@@ -4,8 +4,6 @@ Maud does not have a built-in concept of partials or sub-templates. Instead, you
 
 The following example uses a `header` and `footer` function that are used in the `page` function to return a final result.
 
-Here is a page that has a dynamic page title, a body and a footer with an RSS link:
-
 ```rust
 extern crate maud;
 
@@ -34,12 +32,15 @@ fn footer() -> Markup {
 }
 
 /// The final Markup, including `header` and `footer`.
-pub fn page(title: &str) -> Markup {
+///
+/// Additionally takes a `greeting_box` that's `Markup`, not `&str`.
+pub fn page(title: &str, greeting_box: Markup) -> Markup {
     html! {
         // Add the header markup to the page
         (header(title))
         body {
             h1 { "Hello World" }
+            (greeting_box)
         }
         // Add the footer markup to the page
         (footer())
@@ -47,4 +48,12 @@ pub fn page(title: &str) -> Markup {
 }
 ```
 
-Calling `page` with a title will then return the markup for the whole page.
+Using the `page` function will return the markup for the whole page and looks like this:
+
+```rust
+fn main() {
+    page("Hello!", html! {
+        div { "Greetings, Maud." }
+    });
+}
+```
