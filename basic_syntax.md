@@ -26,6 +26,30 @@ html! {
 
 [dynamic content]: dynamic_content.md
 
+If the string is long, or contains many special characters, then it may be worth using [raw strings] instead:
+
+```rust
+use maud::PreEscaped;
+html! {
+    (PreEscaped(r#"
+        <script>
+            alert("Look ma, no backslashes!");
+        </script>
+    "#))
+}
+```
+
+[raw strings]: https://doc.rust-lang.org/reference/tokens.html#raw-string-literals
+
+If you want to add a `<!DOCTYPE html>` declaration to your page, you may use the `maud::DOCTYPE` constant instead of writing it out by hand:
+
+```rust
+use maud::DOCTYPE;
+html! {
+    (DOCTYPE)  // <!DOCTYPE html>
+}
+```
+
 ## Elements `p`
 
 Write an element using curly braces: `p { ... }`.
