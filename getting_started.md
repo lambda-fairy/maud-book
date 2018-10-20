@@ -11,8 +11,7 @@ maud = "*"
 Now save the following to `src/main.rs`:
 
 ```rust
-#![feature(proc_macro_non_items)]
-#![feature(use_extern_macros)]  // <- IMPORTANT don't forget this!
+#![feature(proc_macro_hygiene)]
 
 extern crate maud;
 use maud::html;
